@@ -31,9 +31,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.MapDefaultControllerRoute();
 
+// Authentcation and authorization go AFTER UseRouting and BEFORE the Map calls.
 app.UseAuthentication();
 app.UseAuthorization();
+
+// MapControllers turn on attribute-routed controllers like AuthAPICOntroller ([Route("api/auth")]).
+app.MapControllers();
+app.MapDefaultControllerRoute();
 
 app.Run();
